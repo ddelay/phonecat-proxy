@@ -17,9 +17,26 @@ var listenPort = 80;
 var targetPort = 9000;
 
 //
-// Create a basic proxy server in one line of code...
+// Create a custom proxy server ...
 //
-httpProxy.createServer(options).listen(listenPort);
+var proxy = httpProxy.createServer({});
+
+var server = http.createServer(function(req, res) {
+  //debugger;
+  
+  console.log('Proxy request: ' + req.method + ' ' + req.url);
+  
+  if ( req.url.startsWith('/phones.nsf')) {
+    // Redirect to Domino
+    proxy.web(req, res, {target:'http://algonquin.swg.usma.ibm.com'});
+  }
+  else {
+    // Otherwise, send to default target
+    proxy.web(req, res, options);
+  }
+});
+
+server.listen(listenPort);
 console.log('Proxy started on port ' + listenPort);
 
 //
