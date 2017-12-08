@@ -49,13 +49,24 @@ cd /angular-phonecat
 npm start
 ```
 
-Once started, verify you can open the application at http://localhost:8000.
+Once started, verify you can open the application at http://localhost:8000/index.html.
 
 ### Start the proxy server
 
-From a second Node.js shell:
+From a _second_ Node.js shell:
 
 ```
 cd /phonecat-proxy
 node proxy http://your.server.com
 ```
+
+Substitute the host name of your Domino server for `your.server.com` above.  This starts the proxy 
+server on port 80.  If that port is already in use, you can start the proxy on a different port:
+
+```
+node proxy http://your.server.com 8080
+```
+
+### Verify you can access angular-phonecat through the proxy
+
+Assuming the proxy is listening on port 80.  Open the http://localhost/index.html in a browser.
