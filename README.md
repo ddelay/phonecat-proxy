@@ -69,8 +69,8 @@ node proxy http://your.server.com 8080
 
 ### Access angular-phonecat through the proxy
 
-Assuming the proxy is listening on port 80, open http://localhost:80/index.html in a browser.  If you
-started the proxy on a different port, be sure to change the port number in the URL.  This should
+Assuming the proxy is listening on port 80, open http://localhost:80/index.html in a browser.  (If you
+started the proxy on a different port, be sure to change the port number in the preceding URL.)  This should
 cause the browser to load the same client-side resources (.html, .css and .js) as before.  However,
 when **angular-phonecat** attempts to `GET /phones/phones.json`, the proxy rewrites the URL and redirects
 the request to http://your.server.com.  It uses the Domino data API to read the list of phones from
