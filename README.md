@@ -76,5 +76,28 @@ started the proxy on a different port, be sure to change the port number in the 
 This should cause the browser to load the same client-side resources (.html, .css and .js) as before.  However,
 when **angular-phonecat** attempts to `GET /phones/phones.json`, the proxy rewrites the URL and redirects
 the request to http://your.server.com.  It uses the Domino data API to read the list of phones from
-a view in **phones.nsf**.  Then **angular-phonecat** reads each phone's thumbnail image from a separate 
+a view in **phones.nsf**.  
+
+```
+Proxy request: GET /phones/phones.json
+Rewriting URL to /phones.nsf/api/data/collections/name/Phones?count=200&systemcolumns=0
+Redirecting request to Domino.
+```
+
+Then **angular-phonecat** reads each phone's thumbnail image from a separate 
 document in **phones.nsf** -- again using the Domino data API.
+
+```
+Proxy request: GET /phones.nsf/api/data/documents/unid/1F79ADF17BB8D993852581EF00606771/Attachments/motorola-xoom.0.jpg
+Redirecting request to Domino.
+Proxy request: GET /phones.nsf/api/data/documents/unid/406F2F3BC902C92C852581EF0061B262/Attachments/dell-streak-7.0.jpg
+Redirecting request to Domino.
+Proxy request: GET /phones.nsf/api/data/documents/unid/94723837DF268907852581EF0061EC47/Attachments/samsung-gem.0.jpg
+Redirecting request to Domino.
+Proxy request: GET /phones.nsf/api/data/documents/unid/1FF8B6CEDA015CDD852581EF006230D0/Attachments/nexus-s.0.jpg
+Redirecting request to Domino.
+Proxy request: GET /phones.nsf/api/data/documents/unid/65F99C091496CE4A852581F0005A1169/Attachments/t-mobile-mytouch-4g.0.jpg
+Redirecting request to Domino.
+Proxy request: GET /phones.nsf/api/data/documents/unid/6151B055F2FB1E34852581F2006D1661/Attachments/sanyo-zio.0.jpg
+Redirecting request to Domino.
+```
