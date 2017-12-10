@@ -32,15 +32,16 @@ This proxy server assumes **angular-phonecat** is listening on http://localhost:
 
 ## Usage
 
-### Checkout step-7 of angular-phonecat
+### Checkout step-8 of angular-phonecat
 
 ```
 cd /angular-phonecat
-git checkout -f step-7
+git checkout -f step-8
 ```
 
-This step is required only because **phones.nsf** does not support image URLs yet.  A future
-version of the project will support images and other **angular-phonecat** features.
+This step is required only because the design of **phones.nsf** does not support all
+**angular-phonecat** features yet.  A future
+version of the project will support **angular-phonecat** features beyond **step-8**.
 
 ### Start angular-phonecat
 
@@ -70,8 +71,10 @@ node proxy http://your.server.com 8080
 ### Access angular-phonecat through the proxy
 
 Assuming the proxy is listening on port 80, open http://localhost:80/index.html in a browser.  (If you
-started the proxy on a different port, be sure to change the port number in the preceding URL.)  This should
-cause the browser to load the same client-side resources (.html, .css and .js) as before.  However,
+started the proxy on a different port, be sure to change the port number in the preceding URL.)  
+
+This should cause the browser to load the same client-side resources (.html, .css and .js) as before.  However,
 when **angular-phonecat** attempts to `GET /phones/phones.json`, the proxy rewrites the URL and redirects
 the request to http://your.server.com.  It uses the Domino data API to read the list of phones from
-**phones.nsf**.
+a view in **phones.nsf**.  Then **angular-phonecat** reads each phone's thumbnail image from a separate 
+document in **phones.nsf** -- again using the Domino data API.
